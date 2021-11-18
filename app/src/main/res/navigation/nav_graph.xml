@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="br.com.lodjinha.ui.fragments.HomeFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_mainFragment_to_productsListFragment"
+            app:destination="@id/productsListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_productViewFragment"
+            app:destination="@id/productViewFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_errorFragment"
+            app:destination="@id/errorFragment" />
+    </fragment>
+    <fragment android:id="@+id/errorFragment"
+        android:name="br.com.lodjinha.ui.fragments.ErrorFragment"
+        android:label="@string/error_title"
+        tools:layout="@layout/fragment_error"/>
+    <fragment android:id="@+id/aboutFragment"
+        android:name="br.com.lodjinha.ui.fragments.AboutFragment"
+        android:label="@string/about_title"
+        tools:layout="@layout/fragment_about"/>
+    <fragment
+        android:id="@+id/productsListFragment"
+        android:name="br.com.lodjinha.ui.fragments.ProductsListFragment"
+        tools:layout="@layout/fragment_products_list" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="categoryId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/productViewFragment"
+        android:name="br.com.lodjinha.ui.fragments.ProductViewFragment"
+        tools:layout="@layout/fragment_product" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="productId"
+            app:argType="integer" />
+        <argument
+            android:name="tvProductCategory"
+            app:argType="string" />
+        <argument
+            android:name="tvProdcutName"
+            app:argType="string" />
+        <argument
+            android:name="tvProductPrice2"
+            app:argType="string" />
+        <argument
+            android:name="tvProductPriceFrom2"
+            app:argType="string" />
+        <argument
+            android:name="tvProductDescription"
+            app:argType="string" />
+        <argument
+            android:name="urlImagem"
+            app:argType="string" />
+    </fragment>
+</navigation>
