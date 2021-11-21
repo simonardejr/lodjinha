@@ -68,10 +68,6 @@ class ProductViewFragment: Fragment() {
                 })
             }
         }
-
-        _binding?.onReserve?.setOnClickListener {
-            DialogUtils.showDialog(context, getString(R.string.reseverd_product)) {}
-        }
     }
 
     override fun onDestroyView() {

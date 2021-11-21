@@ -10,19 +10,6 @@
     android:orientation="vertical"
     android:gravity="bottom">
 
-    <ImageView
-        android:id="@+id/ivMenuLogo"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:padding="10dp"
-        app:srcCompat="@drawable/logo_menu"
-        android:background="@drawable/circle"
-        android:contentDescription="logo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="60dp"
-        />
     <TextView
         android:text="@string/app_name"
         android:id="@+id/tvAppName"

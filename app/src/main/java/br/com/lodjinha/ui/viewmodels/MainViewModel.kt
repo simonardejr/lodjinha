@@ -33,7 +33,7 @@ class MainViewModel(
             val categoriesResponse = async {repository.getCategoria()}
             val maisVendidosResponse = async {repository.getMaisVendidos()}
 
-            val homeState = handleHomeResponses(
+            val homeState = handleHomeResponse(
                 bannerResponse.await(),
                 categoriesResponse.await(),
                 maisVendidosResponse.await()
@@ -42,49 +42,28 @@ class MainViewModel(
             _homeDataLiveData.postValue(homeState)
         }
 
-        println("Tempo do request é? $time1 ms")
+        // println("Tempo do request é? $time1 ms")
     }
 
-    private fun handleHomeResponses(
-        bannerResponse: ResponseWrapper<GetBannerResponse>,
-        categoriesResponse: ResponseWrapper<GetCategoriaResponse>,
-        maisVendidosResponse: ResponseWrapper<GetMaisVendidosResponse>
+    private fun handleHomeResponse(
+        bannerResponse: Response<GetBannerResponse>,
+        categoriesResponse: Response<GetCategoriaResponse>,
+        maisVendidosResponse: Response<GetMaisVendidosResponse>
     ): HomeViewState {
-        var bannerData: List<GetBannerResponse.Banner>? = null
-        var categoriesData: List<GetCategoriaResponse.Categoria>? = null
-        var maisVendidosData: List<GetMaisVendidosResponse.ProdutoResponse>? = null
-
-        when (bannerResponse) {
-            is ResponseWrapper.Success -> {
-                bannerData = bannerResponse.result.data
-            }
-        }
-        when (categoriesResponse) {
-            is ResponseWrapper.Success -> {
-                categoriesData = categoriesResponse.result.data
-            }
-        }
-        when (maisVendidosResponse) {
-            is ResponseWrapper.Success -> {
-                maisVendidosData = maisVendidosResponse.result.data
-            }
-        }
-
-        if (bannerData != null &&
-            categoriesData != null &&
-            maisVendidosData != null) {
-
+        if (bannerResponse.isSuccessful and
+                categoriesResponse.isSuccessful and
+                maisVendidosResponse.isSuccessful) {
             return HomeViewState(
                 loading = false,
                 error = false,
                 data = HomeData(
-                    bannerData = bannerData,
-                    categoriesData = categoriesData,
-                    maisVendidosData = maisVendidosData
+                    bannerData = bannerResponse.body()?.data,
+                    categoriesData = categoriesResponse.body()?.data,
+                    maisVendidosData = maisVendidosResponse.body()?.data
                 )
             )
-        }
 
+        }
         return HomeViewState(
             loading = false,
             error = true,

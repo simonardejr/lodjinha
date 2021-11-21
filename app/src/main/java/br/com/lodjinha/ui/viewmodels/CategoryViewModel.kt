@@ -41,32 +41,21 @@ class CategoryViewModel(
             _homeDataLiveData.postValue(homeState)
         }
 
-        println("Tempo do request é? $time1 ms")
+        // println("Tempo do request é? $time1 ms")
     }
 
     private fun handleCategoryResponse(
-        categoryListResponse: ResponseWrapper<GetProdutosPorCategoriaResponse>
+        categoryListResponse: Response<GetProdutosPorCategoriaResponse>
     ): CategoryViewState {
-
-        var categoryListData: List<GetProdutosPorCategoriaResponse.ProdutoResponse>? = null
-
-        when (categoryListResponse) {
-            is ResponseWrapper.Success -> {
-                categoryListData = categoryListResponse.result.data
-            }
-        }
-
-        if (categoryListData != null) {
-
+        if (categoryListResponse.isSuccessful) {
             return CategoryViewState(
                 loading = false,
                 error = false,
                 data = CategoryData(
-                    categoryListData = categoryListData,
+                    categoryListData = categoryListResponse.body()?.data,
                 )
             )
         }
-
         return CategoryViewState(
             loading = false,
             error = true,

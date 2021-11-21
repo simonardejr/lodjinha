@@ -5,24 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/error"
-        android:id="@+id/imageError"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="-60sp"
-        app:layout_constraintTop_toTopOf="parent"/>
     <TextView
-        android:text="@string/error_description"
+        android:id="@+id/errorDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvDeveloperName"
+        android:layout_marginBottom="30sp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/error_description"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/imageError"
-        android:layout_marginBottom="30sp"
-        android:textSize="@dimen/textsize_largexxl"
-        android:fontFamily="@font/roboto_medium"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAlignment="center"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

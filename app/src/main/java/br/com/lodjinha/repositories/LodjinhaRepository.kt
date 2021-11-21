@@ -13,41 +13,27 @@ class LodjinhaRepository(
     private val service: LodjinhaService
 ) {
 
-    suspend fun getBanner(): ResponseWrapper<GetBannerResponse> {
-        service.getBanner()?.let {
-            if (it.body() != null) {
-                return ResponseWrapper.Success(it.body()!!)
-            }
-        }
-        return ResponseWrapper.Error("Erro ao carregar os banners")
+    suspend fun getBanner(): Response<GetBannerResponse> {
+        return SafeApiCall.safeNetworkRequest {
+            service.getBanner()
+        } ?: Response.success(null)
     }
 
-    suspend fun getCategoria(): ResponseWrapper<GetCategoriaResponse> {
-        service.getCategoria()?.let {
-            if (it.body() != null) {
-                return ResponseWrapper.Success(it.body()!!)
-            }
-        }
-        return ResponseWrapper.Error("Erro ao carregar as categorias")
+    suspend fun getCategoria(): Response<GetCategoriaResponse> {
+        return SafeApiCall.safeNetworkRequest {
+            service.getCategoria()
+        } ?: Response.success(null)
     }
 
-    suspend fun getMaisVendidos(): ResponseWrapper<GetMaisVendidosResponse> {
-        service.getMaisVendidos()?.let {
-            if (it.body() != null) {
-                return ResponseWrapper.Success(it.body()!!)
-            }
-        }
-        return ResponseWrapper.Error("Erro ao carregar os mais vendidos")
+    suspend fun getMaisVendidos(): Response<GetMaisVendidosResponse> {
+        return SafeApiCall.safeNetworkRequest {
+            service.getMaisVendidos()
+        } ?: Response.success(null)
     }
 
-    suspend fun getProdutoPorCategoria(id: Int): ResponseWrapper<GetProdutosPorCategoriaResponse> {
-        service.getProdutoPorCategoria(id)?.let {
-            if (it.body() != null) {
-                return ResponseWrapper.Success(it.body()!!)
-            }
-        }
-        return ResponseWrapper.Error("Erro ao carregar os produtos por categoria")
+    suspend fun getProdutoPorCategoria(id: Int): Response<GetProdutosPorCategoriaResponse> {
+        return SafeApiCall.safeNetworkRequest {
+            service.getProdutoPorCategoria(id)
+        } ?: Response.success(null)
     }
-
-
 }
