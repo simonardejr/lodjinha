@@ -67,11 +67,19 @@ class ProductsListFragment : Fragment() {
     private fun setupProductList() {
         productListAdapter = ProductsListAdapter()
         binding.produtosRv.adapter = productListAdapter
-        productListAdapter.setOnItemClickListener { categoria ->
+        productListAdapter.setOnItemClickListener { produtoResponse ->
+            // println(produtoResponse)
+
             findNavController().navigate(
-                HomeFragmentDirections.actionMainFragmentToProductsListFragment(
-                    title = categoria.descricao,
-                    categoryId = categoria.id
+                HomeFragmentDirections.actionMainFragmentToProductViewFragment(
+                    title = produtoResponse.nome,
+                    productId = produtoResponse.id,
+                    tvProductCategory = produtoResponse.categoria.descricao,
+                    tvProdcutName = produtoResponse.nome,
+                    tvProductPrice2 = produtoResponse.precoPor.toString(),
+                    tvProductPriceFrom2 = produtoResponse.precoDe.toString(),
+                    tvProductDescription = produtoResponse.descricao,
+                    urlImagem = produtoResponse.urlImagem
                 )
             )
         }
