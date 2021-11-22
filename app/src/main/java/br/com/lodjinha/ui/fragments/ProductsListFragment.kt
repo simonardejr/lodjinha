@@ -7,14 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import br.com.lodjinha.api.RetrofitInstance
 import br.com.lodjinha.databinding.FragmentProductsListBinding
 import br.com.lodjinha.repositories.LodjinhaRepository
 import br.com.lodjinha.ui.NavigationDelegate
+import br.com.lodjinha.ui.adapters.CategoriasAdapter
+import br.com.lodjinha.ui.adapters.ProductsListAdapter
 import br.com.lodjinha.ui.viewmodels.CategoryViewModel
 import br.com.lodjinha.ui.viewmodels.CategoryViewModelProviderFactory
 import br.com.lodjinha.ui.viewmodels.MainViewModel
 import br.com.lodjinha.ui.viewmodels.MainViewModelProviderFactory
+import br.com.lodjinha.utils.toggleVisibilty
 
 class ProductsListFragment : Fragment() {
 
@@ -24,6 +28,8 @@ class ProductsListFragment : Fragment() {
     private val args: ProductsListFragmentArgs by lazy {
         ProductsListFragmentArgs.fromBundle(requireArguments())
     }
+
+    private lateinit var productListAdapter: ProductsListAdapter
 
     private val viewModel: CategoryViewModel by lazy {
         val repository = LodjinhaRepository(RetrofitInstance.apiService)
@@ -52,8 +58,35 @@ class ProductsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         listener?.setToolbarTitle(args.title)
+        setupProductList()
+        setupObservers()
         //chamar aqui o get list
         viewModel.getMainHomeData(args.categoryId)
+    }
+
+    private fun setupProductList() {
+        productListAdapter = ProductsListAdapter()
+        binding.produtosRv.adapter = productListAdapter
+        productListAdapter.setOnItemClickListener { categoria ->
+            findNavController().navigate(
+                HomeFragmentDirections.actionMainFragmentToProductsListFragment(
+                    title = categoria.descricao,
+                    categoryId = categoria.id
+                )
+            )
+        }
+    }
+
+    private fun setupObservers() {
+        viewModel.homeDataLiveData.observe(viewLifecycleOwner) { viewState ->
+            when {
+                viewState.data != null -> {
+                    if (viewState.data?.categoryListData.isNullOrEmpty().not()) {
+                        productListAdapter.differ.submitList(viewState.data?.categoryListData)
+                    }
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

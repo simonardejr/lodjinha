@@ -20,6 +20,7 @@ import br.com.lodjinha.utils.DialogUtils
 import br.com.lodjinha.utils.toggleVisibilty
 import android.content.Intent
 import android.net.Uri
+import br.com.lodjinha.ui.adapters.ProductsListAdapter
 
 
 class HomeFragment : Fragment() {
@@ -64,7 +65,7 @@ class HomeFragment : Fragment() {
         maisVendidosAdapter = ProductsAdapter()
         binding.maisVendidosRv.adapter = maisVendidosAdapter
         maisVendidosAdapter.setOnItemClickListener { produtoResponse ->
-            println(produtoResponse)
+            // println(produtoResponse)
 
             findNavController().navigate(
                 HomeFragmentDirections.actionMainFragmentToProductViewFragment(
