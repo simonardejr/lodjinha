@@ -26,7 +26,7 @@ class CategoryViewModel(
     private val _homeDataLiveData = MutableLiveData<CategoryViewState>()
     val homeDataLiveData: LiveData<CategoryViewState> get() = _homeDataLiveData
 
-    fun getMainHomeData(id: Int) = viewModelScope.launch {
+    fun getProductListByCategoryData(id: Int) = viewModelScope.launch {
         _homeDataLiveData.postValue(CategoryViewState(
             loading = true
         ))

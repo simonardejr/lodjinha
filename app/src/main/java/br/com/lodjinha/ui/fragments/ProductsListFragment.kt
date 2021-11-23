@@ -61,7 +61,7 @@ class ProductsListFragment : Fragment() {
         setupProductList()
         setupObservers()
         //chamar aqui o get list
-        viewModel.getMainHomeData(args.categoryId)
+        viewModel.getProductListByCategoryData(args.categoryId)
     }
 
     private fun setupProductList() {
@@ -87,7 +87,6 @@ class ProductsListFragment : Fragment() {
 
     private fun setupObservers() {
         viewModel.homeDataLiveData.observe(viewLifecycleOwner) { viewState ->
-            println(viewState)
             when {
                 viewState.loading -> {
                     binding.productListLayout.toggleVisibilty(false)
