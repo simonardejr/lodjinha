@@ -50,8 +50,19 @@ class MainActivity : AppCompatActivity(), NavigationDelegate {
             when(destination.id) {
                 R.id.mainFragment -> {
                     binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+                    binding.topAppBar.menu.findItem(R.id.filter).apply {
+                        isVisible = false
+                    }
+                }
+                R.id.productsListFragment -> {
+                    binding.topAppBar.menu.findItem(R.id.filter).apply {
+                        isVisible = true
+                    }
                 }
                 else -> {
+                    binding.topAppBar.menu.findItem(R.id.filter).apply {
+                        isVisible = false
+                    }
                 }
             }
 

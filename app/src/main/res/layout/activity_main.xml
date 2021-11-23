@@ -18,6 +18,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/topAppBar"
                 android:layout_width="match_parent"
@@ -25,7 +26,29 @@
                 android:layout_height="wrap_content"
                 app:title="@string/app_name"
                 style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
-                android:elevation="0dp" >
+                android:elevation="0dp"
+                app:navigationIcon="@drawable/ic_home"
+                app:menu="@menu/top_app_bar"
+                >
+
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content" android:background="@color/transparent">-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/iv_back"-->
+
+<!--                        android:layout_width="wrap_content"-->
+
+<!--                        android:padding="16dp"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_alignParentEnd="true"-->
+<!--                        android:src="@drawable/ic_home"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@color/transparent"-->
+<!--                        android:visibility="gone"/>-->
+
+<!--                </RelativeLayout>-->
 
             </com.google.android.material.appbar.MaterialToolbar>
 

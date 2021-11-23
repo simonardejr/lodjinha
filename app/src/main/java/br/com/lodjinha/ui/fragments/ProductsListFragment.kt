@@ -3,9 +3,6 @@ package br.com.lodjinha.ui.fragments
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import br.com.lodjinha.api.RetrofitInstance
@@ -19,6 +16,14 @@ import br.com.lodjinha.ui.viewmodels.CategoryViewModelProviderFactory
 import br.com.lodjinha.ui.viewmodels.MainViewModel
 import br.com.lodjinha.ui.viewmodels.MainViewModelProviderFactory
 import br.com.lodjinha.utils.toggleVisibilty
+import android.R
+import android.view.*
+import br.com.lodjinha.ui.components.filterbottomsheet.FilterBottomSheetDialog.Companion.openBottomSheetDialog
+import android.view.MenuInflater
+
+
+
+
 
 class ProductsListFragment : Fragment() {
 
@@ -51,6 +56,7 @@ class ProductsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentProductsListBinding.inflate(inflater)
+
         return binding.root
     }
 
