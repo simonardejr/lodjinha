@@ -5,11 +5,14 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ui.fragments.ProductsListFragment">
+    tools:context=".ui.fragments.ProductsListFragment"
+    android:layout_gravity="center"
+    android:gravity="center">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/productListLayout">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/produtos_rv"
@@ -24,6 +27,11 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progress"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

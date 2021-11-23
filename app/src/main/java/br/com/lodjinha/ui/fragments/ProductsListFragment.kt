@@ -87,8 +87,21 @@ class ProductsListFragment : Fragment() {
 
     private fun setupObservers() {
         viewModel.homeDataLiveData.observe(viewLifecycleOwner) { viewState ->
+            println(viewState)
             when {
+                viewState.loading -> {
+                    binding.productListLayout.toggleVisibilty(false)
+                    binding.progress.toggleVisibilty(true)
+                }
+                viewState.error -> {
+                    // TODO Criar placeholder caso de erro
+                    findNavController().navigate(
+                        HomeFragmentDirections.actionMainFragmentToErrorFragment()
+                    )
+                }
                 viewState.data != null -> {
+                    binding.progress.toggleVisibilty(false)
+                    binding.productListLayout.toggleVisibilty(true)
                     if (viewState.data?.categoryListData.isNullOrEmpty().not()) {
                         productListAdapter.differ.submitList(viewState.data?.categoryListData)
                     }
