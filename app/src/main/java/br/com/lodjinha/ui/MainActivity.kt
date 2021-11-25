@@ -7,6 +7,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import br.com.lodjinha.R
 import br.com.lodjinha.databinding.ActivityMainBinding
+import br.com.lodjinha.ui.components.filterbottomsheet.FilterBottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 interface NavigationDelegate {
     fun setToolbarTitle(title: String)
@@ -46,7 +49,21 @@ class MainActivity : AppCompatActivity(), NavigationDelegate {
                 }
             }
 
+            binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.filter -> {
 
+                        val bottomSheetDialogFragment: BottomSheetDialogFragment = FilterBottomSheetDialog()
+
+                        bottomSheetDialogFragment.show(
+                            supportFragmentManager, bottomSheetDialogFragment.tag
+                        )
+
+                        true
+                    }
+                    else -> false
+                }
+            }
             when(destination.id) {
                 R.id.mainFragment -> {
                     binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)

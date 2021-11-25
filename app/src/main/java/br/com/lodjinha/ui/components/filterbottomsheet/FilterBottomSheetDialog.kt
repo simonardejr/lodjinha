@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import br.com.lodjinha.databinding.BottomSheetFilterBinding
+import br.com.lodjinha.ui.adapters.BottomSheetAdapter
 //import com.example.aula2_iesb_lodjinha.databinding.BottomSheetFilterBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -23,6 +24,7 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
 
     // TODO CREATE ADAPTER
     // private lateinit var adapter: FilterAdapter
+     private lateinit var adapter: BottomSheetAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,10 +53,12 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
 
         val behavior = BottomSheetBehavior.from(dialog)
         behavior.state = BottomSheetBehavior.STATE_SETTLING
-        behavior.isDraggable = true
+        behavior.isDraggable = false
 
 
         // TODO: Setar o adapter
+        adapter = BottomSheetAdapter()
+        binding.bottomviewRecyclerview.adapter = adapter
     }
 
     companion object {
